@@ -1,19 +1,19 @@
-/* the unknown type */
-let userInput: unknown;
-let userName: string;
+//Intersection types
+//we can do same thing using interfaces as well
+type Admin = {
+  name: string;
+  privileges: string[];
+};
 
-userInput = 5;
-userInput = "Max";
-// userName = userInput; // we cannot assign directly unkown type value to string or number etc variable, we had to check type by if to assign it.
+type Employee = {
+  name: string;
+  startDate: Date;
+};
 
-if (typeof userInput === "string") {
-  userName = userInput;
-}
+type ElevatedEmployee = Admin & Employee;
 
-/* Never type */
-//the return type is never. it is added newly
-function generateError(message: string, code: number) {
-  throw { message: message, errorCode: code };
-}
-
-const result = generateError("An error occured!", 500);
+const e1: ElevatedEmployee = {
+  name: "Max",
+  privileges: ["creat-server"],
+  startDate: new Date(),
+};
